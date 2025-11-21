@@ -26,7 +26,16 @@ def home(request):
 @login_required
 def dashboard(request):
     if request.user.groups.filter(name='admin').exists():
-        return render(request, 'edu_lockapp/dashboard.html')
+        # Prüfen, ob der Benutzer die Welcome-Message schon gesehen hat
+        show_welcome = not request.session.get('welcome_shown', False)
+
+        # Session-Flag setzen, damit es nur einmal pro Login angezeigt wird
+        if show_welcome:
+            request.session['welcome_shown'] = True
+
+        return render(request, 'edu_lockapp/dashboard.html', {
+            'show_welcome': show_welcome
+        })
     else:
         messages.error(request, "Du hast keine Berechtigung, auf das Dashboard zuzugreifen.")
         return redirect('login')

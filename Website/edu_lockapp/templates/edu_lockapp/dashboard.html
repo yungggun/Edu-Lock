@@ -11,20 +11,27 @@
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'edu_lockapp/css/style.css' %}"></head>
+        <link rel="stylesheet" href="{% static 'edu_lockapp/css/style.css' %}">
+    </head>
     <body>
 
-        {% if messages %}
-  <div id="messages">
-    {% for message in messages %}
-      <div class="alert alert-success">
-        {{ message }}
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
+        {% if show_welcome %}
+            <section id="welcome-screen" class="welcome-screen">
+                <div class="pulse-bg"></div>
+                <div class="welcome-box">
+                    <h1 class="welcome-title neon-reveal">
+                        Willkommen zurück,
+                        {{ user.username }}
+                    </h1>
+                    <p class="welcome-sub fade-soft">
+                        System bereit. Dashboard wird geöffnet.
+                    </p>
+                </div>
+            </section>
+        {% endif %}
 
-        <div class="page-container page-home d-flex flex-column">
+        <!-- Dashboard-INHALT -->
+        <div id="page-content" class="page-container page-home d-flex flex-column">
 
             <header class="header d-flex align-items-center px-4">
                 <div
@@ -36,13 +43,6 @@
                             class="logo-img me-2">
                         <h2 class="logo-text m-0">Edu Lock</h2>
                     </div>
-
-                    <!-- <nav class="d-none d-lg-flex flex-nowrap"> <ul class="nav flex-nowrap"> <li
-                    class="nav-item"><a class="nav-link active" href="#">Home</a></li> <li
-                    class="nav-item"><a class="nav-link" href="#">Features</a></li> <li
-                    class="nav-item"><a class="nav-link" href="#">Produkt</a></li> <li
-                    class="nav-item"><a class="nav-link" href="#">Kontakt</a></li> </ul> </nav> -->
-
                     <div class="d-flex align-items-center">
                         <a href="{% url 'login' %}" class="btn btn-glow d-none d-lg-inline me-3">Login</a>
                         <button
@@ -60,6 +60,7 @@
                 <div class="container-fluid text-center">
                     <h1 class="dashboard-title m-0">Dashboard</h1>
                 </div>
+                <!-- Dashboard-Content hier -->
             </main>
 
             <footer class="footer text-center py-5 mt-auto">
@@ -91,7 +92,6 @@
                     </ul>
                 </div>
             </div>
-
         </div>
 
         <script
