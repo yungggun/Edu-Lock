@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edu Lock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="page-container page-landing d-flex flex-column">
+
+    <header class="header d-flex align-items-center px-4">
+      <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap">
+        <div class="logo d-flex align-items-center">
+          <img src="../img/logo.png" alt="Logo" class="logo-img me-2">
+          <h2 class="logo-text m-0">Edu Lock</h2>
+        </div>
+
+        <nav class="d-none d-lg-flex flex-nowrap">
+          <ul class="nav flex-nowrap">
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Produkt</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Kontakt</a></li>
+          </ul>
+        </nav>
+
+        <div class="d-flex align-items-center">
+          <a href="./login.html" class="btn btn-glow d-none d-lg-inline me-3">Login</a>
+          <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="landing-main flex-grow-1">
+
+      <!-- Hero Section -->
+      <section class="landing-hero">
+        <div class="hero-glow-bg"></div>
+        <div class="hero-content-wrapper">
+          <div class="hero-badge">
+            <span class="badge-icon">🚀</span>
+            <span class="badge-text">Next-Gen Access Control</span>
+          </div>
+          
+          <h1 class="hero-title">
+            <span class="hero-title-gradient">Edu Lock</span>
+          </h1>
+          
+          <p class="hero-subtitle">
+            Innovatives Tech-Produkt für sicheren und smarten Zugang zu Klassenzimmern
+          </p>
+          
+          <div class="hero-buttons">
+            <a href="login.html" class="btn-hero btn-hero-primary">
+              <span>Jetzt starten</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="#features" class="btn-hero btn-hero-secondary">
+              <span>Mehr erfahren</span>
+            </a>
+          </div>
+          
+          <!-- Stats -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-value">500+</div>
+              <div class="stat-label">Schulen</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">Uptime</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <div class="stat-value">24/7</div>
+              <div class="stat-label">Support</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="landing-features" id="features">
+        <div class="features-header">
+          <span class="section-badge">Features</span>
+          <h2 class="section-title">Warum Edu Lock?</h2>
+          <p class="section-subtitle">Modernste Technologie für maximale Sicherheit und Komfort</p>
+        </div>
+        
+        <div class="features-grid">
+          <!-- Feature Card 1 -->
+          <div class="landing-feature-card">
+            <div class="feature-icon-wrapper">
+              <div class="feature-icon">🔒</div>
+              <div class="feature-icon-glow"></div>
+            </div>
+            <h3 class="feature-title">Maximale Sicherheit</h3>
+            <p class="feature-description">
+              Kontrollierter NFC-Zugang für Lehrer und Schüler mit modernster Verschlüsselung
+            </p>
+            <ul class="feature-list">
+              <li>256-bit Verschlüsselung</li>
+              <li>Zwei-Faktor-Authentifizierung</li>
+              <li>Echtzeit-Monitoring</li>
+            </ul>
+          </div>
+
+          <!-- Feature Card 2 -->
+          <div class="landing-feature-card">
+            <div class="feature-icon-wrapper">
+              <div class="feature-icon">⚡</div>
+              <div class="feature-icon-glow"></div>
+            </div>
+            <h3 class="feature-title">Blitzschnell</h3>
+            <p class="feature-description">
+              Direkter Zugang ohne Schlüssel - alles in Sekundenschnelle
+            </p>
+            <ul class="feature-list">
+              <li>< 1 Sekunde Response</li>
+              <li>Kein Warten mehr</li>
+              <li>Sofortige Benachrichtigungen</li>
+            </ul>
+          </div>
+
+          <!-- Feature Card 3 -->
+          <div class="landing-feature-card">
+            <div class="feature-icon-wrapper">
+              <div class="feature-icon">📱</div>
+              <div class="feature-icon-glow"></div>
+            </div>
+            <h3 class="feature-title">Smart & Flexibel</h3>
+            <p class="feature-description">
+              Verwaltung über registrierte Geräte oder Schülerkarten
+            </p>
+            <ul class="feature-list">
+              <li>Mobile App Integration</li>
+              <li>NFC & QR-Code Support</li>
+              <li>Cloud-basierte Verwaltung</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="landing-cta">
+        <div class="cta-content">
+          <h2 class="cta-title">Bereit für die Zukunft?</h2>
+          <p class="cta-subtitle">Starten Sie noch heute mit Edu Lock und revolutionieren Sie Ihre Schulverwaltung</p>
+          <div class="cta-buttons">
+            <a href="login.html" class="btn-cta btn-cta-primary">Kostenlos testen</a>
+            <a href="#" class="btn-cta btn-cta-secondary">Demo anfordern</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer text-center py-5 mt-auto">
+      <p class="mb-0 text-secondary">&copy; 2025 Edu Lock. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="mobileNav">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menü</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link text-white active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Features</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Produkt</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

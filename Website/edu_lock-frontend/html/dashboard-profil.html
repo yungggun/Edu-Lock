@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Lock Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <section id="welcome-screen" class="welcome-screen">
+      <div class="pulse-bg"></div>
+      <div class="welcome-box">
+        <h1 class="welcome-title neon-reveal">Willkommen zurück, {{ user.username }}</h1>
+        <p class="welcome-sub fade-soft">System bereit. Dashboard wird geöffnet.</p>
+      </div>
+    </section>
+    <div id="page-content" class="page-container page-dashboard d-flex flex-column">
+      <!-- NEUE MODERNE NAVBAR -->
+      <!-- NAVBAR -->
+      <header class="dashboard-navbar">
+        <div class="navbar-container">
+          <!-- Logo Section -->
+          <div class="navbar-logo">
+            <img src="../img/logo.png" alt="Logo" class="navbar-logo-img">
+            <span class="navbar-logo-text">Edu Lock</span>
+          </div>
+          <!-- Desktop Navigation (ab 1400px) -->
+          <nav class="navbar-menu navbar-menu-desktop">
+            <a href="#" class="nav-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+              <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span>Türen</span>
+            </a>
+            <a href="#" class="nav-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Benutzer</span>
+            </a>
+            <a href="#" class="nav-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10 9 9 9 8 9" />
+              </svg>
+              <span>Logs</span>
+            </a>
+            <a href="#" class="nav-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3" />
+              </svg>
+              <span>Einstellungen</span>
+            </a>
+            <!-- Separator -->
+            <div class="nav-separator"></div>
+            <!-- Profil Link -->
+            <a href="#" class="nav-item active">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span>Profil</span>
+            </a>
+          </nav>
+          <!-- Right Section (Desktop ab 1400px) -->
+          <div class="navbar-actions navbar-actions-desktop">
+            <!-- Notifications -->
+            <div class="navbar-notification">
+              <button class="notification-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                </svg>
+                <span class="notification-badge">3</span>
+              </button>
+            </div>
+            <!-- User Profile -->
+            <div class="navbar-profile">
+              <button class="profile-btn">
+                <div class="navbar-avatar">
+                  <img src="../img/avatar-placeholder.jpg" alt="Avatar" class="avatar-img">
+                </div>
+                <div class="profile-info">
+                  <span class="profile-name">{{ user.username }}</span>
+                  <span class="profile-role">Administrator</span>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <!-- Dropdown Menu -->
+              <div class="profile-dropdown">
+                <a href="#" class="dropdown-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <span>Profil</span>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                  </svg>
+                  <span>Einstellungen</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'login' %}" class="dropdown-item logout">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                  <span>Abmelden</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Mobile: Burger Menu Toggle (bis 1399px) -->
+          <button class="navbar-toggler navbar-toggler-mobile" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavOffcanvas">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </header>
+      <!-- Bootstrap Offcanvas für Mobile Navigation -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileNavOffcanvas">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Menü</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="mobile-user-section mb-4">
+            <div class="navbar-avatar navbar-avatar-mobile mb-2">
+              <img src="../img/avatar-placeholder.jpg" alt="Avatar" class="avatar-img">
+            </div>
+            <div class="mobile-user-name">{{ user.username }}</div>
+            <div class="mobile-user-role">Administrator</div>
+          </div>
+          <hr>
+          <nav class="mobile-nav-links">
+            <a href="#" class="mobile-nav-link active">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+              <span>Dashboard</span>
+            </a>
+            <a href="#" class="mobile-nav-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span>Türen</span>
+            </a>
+            <a href="#" class="mobile-nav-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Benutzer</span>
+            </a>
+            <a href="#" class="mobile-nav-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+              <span>Logs</span>
+            </a>
+            <a href="#" class="mobile-nav-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3" />
+              </svg>
+              <span>Einstellungen</span>
+            </a>
+            <hr>
+            <a href="#" class="mobile-nav-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span>Profil</span>
+            </a>
+            <a href="{% url 'login' %}" class="mobile-nav-link text-danger">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" y1="12" x2="9" y2="12" />
+              </svg>
+              <span>Abmelden</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    </header>
+    <!-- Bootstrap Offcanvas für Mobile Navigation -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileNavOffcanvas">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menü</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- User Info Mobile -->
+        <div class="mobile-user-section mb-4">
+          <div class="navbar-avatar navbar-avatar-mobile mb-2">
+            <img src="../img/avatar-placeholder.jpg" alt="Avatar" class="avatar-img">
+          </div>
+          <div class="mobile-user-name">{{ user.username }}</div>
+          <div class="mobile-user-role">Administrator</div>
+        </div>
+        <hr>
+        <!-- Navigation Links -->
+        <nav class="mobile-nav-links">
+          <a href="#" class="mobile-nav-link active">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            <span>Dashboard</span>
+          </a>
+          <a href="#" class="mobile-nav-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            <span>Türen</span>
+          </a>
+          <a href="#" class="mobile-nav-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Benutzer</span>
+          </a>
+          <a href="#" class="mobile-nav-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            <span>Logs</span>
+          </a>
+          <a href="#" class="mobile-nav-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3" />
+            </svg>
+            <span>Einstellungen</span>
+          </a>
+          <hr>
+          <a href="#" class="mobile-nav-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>Profil</span>
+          </a>
+          <a href="{% url 'login' %}" class="mobile-nav-link text-danger">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            <span>Abmelden</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+    </div>
+    </header>
+    <main class="dashboard-container">
+      <div class="profile-wrapper">
+        <!-- Profile Information Box -->
+        <div class="profile-info-box">
+          <div class="box-header">
+            <h3 class="box-title">Profildaten</h3>
+            <button class="btn-edit">
+              <span>Bearbeiten</span>
+            </button>
+          </div>
+          <div class="profile-content">
+            <!-- Profile Picture Section -->
+            <div class="profile-picture-section">
+              <div class="profile-avatar">
+                <img src="../img/avatar-placeholder.jpg" alt="Profilbild" class="avatar-img">
+                <div class="avatar-overlay">
+                  <span class="avatar-change">Ändern</span>
+                </div>
+              </div>
+              <div class="profile-status">
+                <div class="status-badge status-online">
+                  <span class="status-dot"></span> Online
+                </div>
+              </div>
+            </div>
+            <!-- Profile Details Grid -->
+            <div class="profile-details-grid">
+              <div class="profile-field">
+                <div class="field-label">Vollständiger Name</div>
+                <div class="field-value">Max Mustermann</div>
+              </div>
+              <div class="profile-field">
+                <div class="field-label">Benutzername</div>
+                <div class="field-value">{{ user.username }}</div>
+              </div>
+              <div class="profile-field">
+                <div class="field-label">E-Mail Adresse</div>
+                <div class="field-value">max.mustermann@edulock.de</div>
+              </div>
+              <div class="profile-field">
+                <div class="field-label">Telefonnummer</div>
+                <div class="field-value">+43 123 456789</div>
+              </div>
+              <div class="profile-field">
+                <div class="field-label">Position</div>
+                <div class="field-value">Administrator</div>
+              </div>
+              <div class="profile-field">
+                <div class="field-label">Abteilung</div>
+                <div class="field-value">IT-Sicherheit</div>
+              </div>
+              <div class="profile-field">
+                <div class="field-label">Registriert seit</div>
+                <div class="field-value">15. Januar 2024</div>
+              </div>
+              <div class="profile-field">
+                <div class="field-label">Letzter Login</div>
+                <div class="field-value">Heute, 14:23 Uhr</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Shortcuts Configuration Box -->
+        <div class="shortcuts-config-box">
+          <div class="box-header">
+            <h3 class="box-title">Dashboard Shortcuts</h3>
+            <button class="btn-add-shortcut">
+              <span>+ Hinzufügen</span>
+            </button>
+          </div>
+          <div class="shortcuts-config-content">
+            <p class="config-description"> Passe deine Dashboard-Shortcuts an. Ziehe die Karten, um die Reihenfolge zu ändern. </p>
+            <div class="shortcuts-config-grid">
+              <!-- Shortcut Item 1 -->
+              <div class="shortcut-config-item">
+                <div class="shortcut-drag-handle">
+                  <span class="drag-icon">⋮⋮</span>
+                </div>
+                <div class="shortcut-config-content">
+                  <div class="shortcut-config-title">Türen Verwalten</div>
+                  <div class="shortcut-config-url">/dashboard/doors</div>
+                </div>
+                <div class="shortcut-config-actions">
+                  <button class="btn-action btn-edit-small">✎</button>
+                  <button class="btn-action btn-delete">✕</button>
+                </div>
+              </div>
+              <!-- Shortcut Item 2 -->
+              <div class="shortcut-config-item">
+                <div class="shortcut-drag-handle">
+                  <span class="drag-icon">⋮⋮</span>
+                </div>
+                <div class="shortcut-config-content">
+                  <div class="shortcut-config-title">Benutzer Verwalten</div>
+                  <div class="shortcut-config-url">/dashboard/users</div>
+                </div>
+                <div class="shortcut-config-actions">
+                  <button class="btn-action btn-edit-small">✎</button>
+                  <button class="btn-action btn-delete">✕</button>
+                </div>
+              </div>
+              <!-- Shortcut Item 3 -->
+              <div class="shortcut-config-item">
+                <div class="shortcut-drag-handle">
+                  <span class="drag-icon">⋮⋮</span>
+                </div>
+                <div class="shortcut-config-content">
+                  <div class="shortcut-config-title">Zugriffsrechte</div>
+                  <div class="shortcut-config-url">/dashboard/permissions</div>
+                </div>
+                <div class="shortcut-config-actions">
+                  <button class="btn-action btn-edit-small">✎</button>
+                  <button class="btn-action btn-delete">✕</button>
+                </div>
+              </div>
+              <!-- Shortcut Item 4 -->
+              <div class="shortcut-config-item">
+                <div class="shortcut-drag-handle">
+                  <span class="drag-icon">⋮⋮</span>
+                </div>
+                <div class="shortcut-config-content">
+                  <div class="shortcut-config-title">Logs Ansehen</div>
+                  <div class="shortcut-config-url">/dashboard/logs</div>
+                </div>
+                <div class="shortcut-config-actions">
+                  <button class="btn-action btn-edit-small">✎</button>
+                  <button class="btn-action btn-delete">✕</button>
+                </div>
+              </div>
+              <!-- Shortcut Item 5 -->
+              <div class="shortcut-config-item">
+                <div class="shortcut-drag-handle">
+                  <span class="drag-icon">⋮⋮</span>
+                </div>
+                <div class="shortcut-config-content">
+                  <div class="shortcut-config-title">Einstellungen</div>
+                  <div class="shortcut-config-url">/dashboard/settings</div>
+                </div>
+                <div class="shortcut-config-actions">
+                  <button class="btn-action btn-edit-small">✎</button>
+                  <button class="btn-action btn-delete">✕</button>
+                </div>
+              </div>
+              <!-- Shortcut Item 6 -->
+              <div class="shortcut-config-item">
+                <div class="shortcut-drag-handle">
+                  <span class="drag-icon">⋮⋮</span>
+                </div>
+                <div class="shortcut-config-content">
+                  <div class="shortcut-config-title">Berichte</div>
+                  <div class="shortcut-config-url">/dashboard/reports</div>
+                </div>
+                <div class="shortcut-config-actions">
+                  <button class="btn-action btn-edit-small">✎</button>
+                  <button class="btn-action btn-delete">✕</button>
+                </div>
+              </div>
+            </div>
+            <div class="shortcuts-info">
+              <div class="info-item">
+                <span class="info-label">Aktive Shortcuts:</span>
+                <span class="info-value">6/10</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer text-center py-5 mt-auto">
+      <p class="mb-0 text-secondary">&copy; 2025 Edu Lock. Alle Rechte vorbehalten.</p>
+    </footer>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="mobileNav">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menü</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-white active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Produkt</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Kontakt</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

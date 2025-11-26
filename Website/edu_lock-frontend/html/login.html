@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Lock - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="page-container page-login d-flex flex-column">
+
+        <header class="header d-flex align-items-center px-4">
+            <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap">
+                <div class="logo d-flex align-items-center">
+                    <img src="../img/logo.png" alt="Logo" class="logo-img me-2">
+                    <h2 class="logo-text m-0">Edu Lock</h2>
+                </div>
+                <div class="d-flex align-items-center">
+                    <a href="./index.html" class="btn btn-glow btn-sm">Home</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="login-main flex-grow-1 d-flex justify-content-center align-items-center">
+            <!-- Background Elements -->
+            <div class="login-bg-glow login-bg-glow-1"></div>
+            <div class="login-bg-glow login-bg-glow-2"></div>
+            
+            <div class="login-wrapper">
+                <!-- Login Card -->
+                <div class="modern-login-card">
+                    <!-- Header -->
+                    <div class="login-card-header">
+                        <div class="login-icon-wrapper">
+                            <div class="login-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h2 class="login-title">Willkommen zurück</h2>
+                        <p class="login-subtitle">Melden Sie sich an, um fortzufahren</p>
+                    </div>
+
+                    <!-- Messages -->
+                    {% if messages %}
+                        <div class="login-messages">
+                            {% for message in messages %}
+                                <div class="alert-modern alert-danger">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        ircle cx="12" cy="12"2" r="10"/>
+                                        <line x1="12" y1="8" x2="12" y2="12"/>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                    </svg>
+                                    <span>{{ message }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <!-- Form -->
+                    <form method="POST" action="{% url 'login' %}" class="login-form">
+                        {% csrf_token %}
+                        
+                        <div class="form-group-modern">
+                            <label for="email" class="form-label-modern">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    ircle cx="12" cy="="7" r="4"/>
+                                </svg>
+                                <span>E-Mail oder Benutzername</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="email"
+                                id="email"
+                                class="form-input-modern"
+                                placeholder="name@email.com oder Benutzername"
+                                required>
+                        </div>
+
+                        <div class="form-group-modern">
+                            <label for="password" class="form-label-modern">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                <span>Passwort</span>
+                            </label>
+                            <div class="password-input-wrapper">
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    class="form-input-modern"
+                                    placeholder="••••••••"
+                                    required>
+                                <button type="button" class="password-toggle" onclick="togglePassword()">
+                                    <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        ircle cx="12" cy="1212" r="3"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-modern">
+                                <input type="checkbox" name="remember">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">Angemeldet bleiben</span>
+                            </label>
+                            <a href="#" class="forgot-password">Passwort vergessen?</a>
+                        </div>
+
+                        <button type="submit" class="btn-login-modern">
+                            <span>Anmelden</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </button>
+                    </form>
+
+                    <!-- Footer -->
+                    <div class="login-card-footer">
+                        <p class="register-text">
+                            Noch kein Konto? 
+                            <a href="#" class="register-link">Jetzt registrieren</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Security Badge -->
+                <div class="security-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span>256-bit SSL verschlüsselt</span>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
