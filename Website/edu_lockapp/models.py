@@ -1,4 +1,5 @@
 from django.db import models
+<<<<<<< HEAD
 from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
@@ -9,3 +10,7 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.firstname} {self.lastname}"
+=======
+
+# Create your models here.
+>>>>>>> 791a39d86f5272bb4f13927b5cda6de149304c60

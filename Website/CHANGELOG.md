@@ -25,6 +25,7 @@ Verfasser: Sebastian Jank
 
 ---
 
+<<<<<<< HEAD
 ## [Stand: 25.11.2025]
 ### Neu hinzugekommen
 - dashboard Frontend
@@ -37,11 +38,24 @@ Verfasser: Sebastian Jank
 - edu_lockapp/views.py
 - edu_lockapp/urls.py
 - edu_lock/urls.py
+=======
+## [Stand: TT.MM.JJJJ]
+### Neu hinzugekommen
+- ...
+
+### Geändert
+- ...
+>>>>>>> 791a39d86f5272bb4f13927b5cda6de149304c60
 
 ### Behoben
 - ...
 
+<<<<<<< HEAD
 ### Nächste Schritte bis 2.12.2025
 - Profile Data in Datenbank GUI
 - Weiterentwicklung von profile Backend
 - evnt. SSH verschlüssung einbauen
+=======
+### Nächste Schritte bis TT.MM.JJJJ
+- ...
+>>>>>>> 791a39d86f5272bb4f13927b5cda6de149304c60

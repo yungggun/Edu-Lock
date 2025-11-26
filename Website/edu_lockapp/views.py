@@ -39,6 +39,7 @@ def dashboard(request):
     else:
         messages.error(request, "Du hast keine Berechtigung, auf das Dashboard zuzugreifen.")
         return redirect('login')
+<<<<<<< HEAD
 
 @login_required
 def profile(request):
@@ -47,3 +48,5 @@ def profile(request):
     else:
         messages.error(request, "Du hast keine Berechtigung, auf das Profil zuzugreifen.")
         return redirect('login')
+=======
+>>>>>>> 791a39d86f5272bb4f13927b5cda6de149304c60
