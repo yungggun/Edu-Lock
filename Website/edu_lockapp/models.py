@@ -1,16 +1,17 @@
 from django.db import models
-<<<<<<< HEAD
 from django.contrib.auth.models import User
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    firstname = models.CharField(max_length=30, default='Max')
-    lastname = models.CharField(max_length=30, default='Mustermann')
+    phone_number = models.CharField(max_length=50, null=True, blank=True)
+    position = models.CharField(max_length=100, null=True, blank=True)
+    department = models.CharField(max_length=100, null=True, blank=True)
+
+    registered_since = models.DateField(null=True, blank=True)
+    last_login = models.CharField(max_length=255, null=True, blank=True)
+
+    picture = models.ImageField(upload_to='person_pics/', null=True, blank=True, default='person_pics/default.jpg')
 
     def __str__(self):
-        return f"{self.user.username} - {self.firstname} {self.lastname}"
-=======
-
-# Create your models here.
->>>>>>> 791a39d86f5272bb4f13927b5cda6de149304c60
+        return f"Profile of {self.user.username}"

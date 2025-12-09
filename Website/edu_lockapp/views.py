@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Profile
+from django.utils.timezone import now
+from .forms import ProfilePictureForm
+
 
 def login_view(request):
     if request.method == "POST":
@@ -12,6 +16,16 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
+
+            try:
+                profile, created = Profile.objects.get_or_create(user=user)
+                profile.last_login = now().strftime("%d.%m.%Y %H:%M")
+                if profile.registered_since is None:
+                    profile.registered_since = now().date()
+                profile.save()
+            except:
+                pass
+
             return redirect('dashboard')
         else:
             messages.error(request, "E-Mail oder Passwort ist falsch.")
@@ -26,27 +40,61 @@ def home(request):
 @login_required
 def dashboard(request):
     if request.user.groups.filter(name='admin').exists():
-        # Prüfen, ob der Benutzer die Welcome-Message schon gesehen hat
+
+        profile, created = Profile.objects.get_or_create(user=request.user)
+        
+        profile.last_login = now().strftime("%d.%m.%Y %H:%M") 
+        profile.save()
+
         show_welcome = not request.session.get('welcome_shown', False)
 
-        # Session-Flag setzen, damit es nur einmal pro Login angezeigt wird
         if show_welcome:
             request.session['welcome_shown'] = True
 
         return render(request, 'edu_lockapp/dashboard.html', {
             'show_welcome': show_welcome
         })
-    else:
-        messages.error(request, "Du hast keine Berechtigung, auf das Dashboard zuzugreifen.")
-        return redirect('login')
-<<<<<<< HEAD
+
+    messages.error(request, "Du hast keine Berechtigung, auf das Dashboard zuzugreifen.")
+    return redirect('login')
+
 
 @login_required
 def profile(request):
-    if request.user.groups.filter(name='admin').exists():
-        return render(request, 'edu_lockapp/dashboard/profile.html')
-    else:
-        messages.error(request, "Du hast keine Berechtigung, auf das Profil zuzugreifen.")
+    if not request.user.groups.filter(name='admin').exists():
+        messages.error(request, "Keine Berechtigung.")
         return redirect('login')
-=======
->>>>>>> 791a39d86f5272bb4f13927b5cda6de149304c60
+
+    if request.method == "POST":
+        user = request.user
+        profile = user.profile
+
+        user.first_name = request.POST.get('first_name', user.first_name)
+        user.last_name = request.POST.get('last_name', user.last_name)
+        user.email = request.POST.get('email', user.email)
+        user.save()
+
+        profile.phone_number = request.POST.get('phone_number', profile.phone_number)
+        profile.save()
+        
+        messages.success(request, "Profil erfolgreich gespeichert.")
+        return redirect('profile')
+
+    return render(request, 'edu_lockapp/dashboard/profile.html', {
+        "profile": request.user.profile,
+        "user": request.user
+    })
+
+
+@login_required
+def upload_avatar(request):
+    if request.method == "POST":
+        try:
+            profile = request.user.profile
+            if "picture" in request.FILES:
+                profile.picture = request.FILES["picture"]
+                profile.save()
+        except Exception as e:
+            messages.error(request, "Fehler beim Hochladen.")
+            
+    return redirect("profile")

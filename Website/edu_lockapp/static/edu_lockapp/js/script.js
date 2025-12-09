@@ -18,3 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 5000); // 5 Sekunden Anzeige
     }
 });
+
+document.querySelectorAll('.invisible-input').forEach(input => {
+       input.addEventListener('input', () => {
+           document.getElementById('save-bar').style.display = 'block';
+       });
+   });
