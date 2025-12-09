@@ -76,8 +76,7 @@ def profile(request):
 
         profile.phone_number = request.POST.get('phone_number', profile.phone_number)
         profile.save()
-        
-        messages.success(request, "Profil erfolgreich gespeichert.")
+
         return redirect('profile')
 
     return render(request, 'edu_lockapp/dashboard/profile.html', {

@@ -212,9 +212,9 @@
           <div class="profile-info-box">
             <div class="box-header">
               <h3 class="box-title">Profildaten</h3>
-              <button class="btn-edit">
-                <span>Bearbeiten</span>
-              </button>
+              <button type="submit" form="profile-details-form" class="btn-edit">
+    <span>Speichern</span>
+</button>
             </div>
             <div class="profile-content">
               <div class="profile-picture-section">
@@ -295,10 +295,6 @@
                     <div class="field-label">Letzter Login</div>
                     <div class="field-value">{{ profile.last_login }}</div>
                   </div>
-                </div>
-                <!-- Versteckter Speicher-Button, erscheint nur bei Änderung -->
-                <div id="save-bar" style="display: none; margin-top: 20px; text-align: right;">
-                  <button type="submit" class="btn btn-primary">Änderungen speichern</button>
                 </div>
               </form>
             </div>
