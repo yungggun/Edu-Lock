@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Lock Dashboard - Türen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'edu_lockapp/css/style.css' %}">
+  </head>
+  <body>  <div id="page-content" class="page-container page-dashboard d-flex flex-column">
+      <!-- NAVBAR -->
+      <header class="dashboard-navbar">
+        <div class="navbar-container">
+          <div class="navbar-logo">
+            <img src="{% static 'edu_lockapp/img/logo.png' %}" alt="Logo" class="navbar-logo-img">
+            <span class="navbar-logo-text">Edu Lock</span>
+          </div>
+         <nav class="navbar-menu navbar-menu-desktop">
+                    <a href="{% url 'dashboard' %}" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="{% url 'doors' %}" class="nav-item active">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                        <span>Türen</span>
+                    </a>
+                    <a href="{% url 'users' %}" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Benutzer</span>
+                    </a>
+                    <a href="{% url 'logs' %}" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                            <polyline points="10 9 9 9 8 9" />
+                        </svg>
+                        <span>Logs</span>
+                    </a>
+                    <div class="nav-separator"></div>
+                    <a href="{% url 'profile' %}" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        <span>Profil</span>
+                    </a>
+                </nav>
+          <div class="navbar-actions navbar-actions-desktop">
+            <div class="navbar-profile">
+              <button class="profile-btn">
+                <div class="navbar-avatar">
+                  <img src="{{  user.profile.picture.url }}" alt="Avatar" class="avatar-img">
+                </div>
+                <div class="profile-info">
+                  <span class="profile-name">{{ user.username }}</span>
+                  <span class="profile-role">Administrator</span>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="dashboard-container">
+        <div class="user-wrapper">
+          <!-- Linke Box: Türen Liste -->
+          <div class="user-list-box">
+            <div class="user-search-wrapper">
+              <div class="user-search-bar">
+                <div class="search-icon-wrapper">
+                  <i class="bi bi-search"></i>
+                </div>
+                <input type="text" class="user-search-input" placeholder="Tür suchen (Raum, ID)...">
+                <button class="user-search-btn" type="button">Suchen</button>
+              </div>
+            </div>
+            <div class="user-table-container">
+              <table class="user-table">
+                <thead>
+                  <tr>
+                    <th>Tür / Raum</th>
+                    <th>Controller IP</th>
+                    <th>Zugriffsgruppen</th>
+                    <th>Status</th>
+                    <th>Aktionen</th>
+                  </tr>
+                </thead>
+                <tbody> {% for door in doors %} <tr>
+                    <td class="user-cell-main">
+                      <div class="user-avatar-small" style="background: {% if door.is_locked %}rgba(245, 158, 11, 0.15){% else %}rgba(16, 185, 129, 0.15){% endif %}; color: {% if door.is_locked %}#fbbf24{% else %}#10b981{% endif %}; border: 1px solid {% if door.is_locked %}rgba(245, 158, 11, 0.3){% else %}rgba(16, 185, 129, 0.3){% endif %};"> {% if door.is_locked %} <i class="bi bi-door-closed-fill"></i> {% else %} <i class="bi bi-door-open-fill"></i> {% endif %} </div>
+                      <div class="user-cell-text">
+                        <div class="user-name-main">{{ door.name }}</div>
+                        <div class="user-name-sub">ID: Door_1</div>
+                      </div>
+                    </td>
+                    <td style="font-family: monospace; color: #94a3b8;">{{ door.controller_ip }}</td>
+                    <td> {% for group in door.access_groups.all %} <span class="user-group-tag user-group-tag-primary">{{ group.name }}</span> {% endfor %} </td>
+                    <td> {% if door.is_locked %} <span class="user-status-badge" style="color: #f59e0b;">
+                        <i class="bi bi-lock-fill me-1"></i> Verschlossen </span> {% else %} <span class="user-status-badge user-status-active">
+                        <i class="bi bi-unlock-fill me-1"></i> Offen </span> {% endif %} </td>
+                    <td>
+                      <div class="user-actions-row">
+                        <button class="user-action-btn user-action-edit" title="Konfigurieren">⚙️</button>
+                        <button class="user-action-btn user-action-success" title="{% if door.is_locked %}Aufschließen{% else %}Abschließen{% endif %}">{% if door.is_locked %}🔓{% else %}🔒{% endif %}</button>
+                      </div>
+                    </td>
+                  </tr> {% empty %} <tr>
+                    <td colspan="5" class="text-center">Keine Türen gefunden.</td>
+                  </tr> {% endfor %} </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Rechte Box: Neue Tür verbinden -->
+          <!-- ... alles wie vorher oben ... -->
+<!-- Rechte Box: Neue Tür verbinden -->
+<div class="user-side-box">
+  <div class="user-create-box">
+    <div class="box-header">
+      <h3 class="box-title">Neue Tür verbinden</h3>
+    </div>
+    <!-- Formular jetzt POST auf dieselbe URL -->
+    <form method="POST" class="user-form">
+      {% csrf_token %}
+      <div class="user-form-row">
+        <label class="user-form-label">Bezeichnung / Raum</label>
+        <input type="text" name="name" class="user-input" placeholder="z.B. Informatik Labor 1" required>
+      </div>
+      <div class="user-form-row">
+        <label class="user-form-label">Controller IP-Adresse</label>
+        <input type="text" name="controller_ip" class="user-input" placeholder="192.168.x.x" required>
+      </div>
+      <div class="user-form-row">
+        <label class="user-form-label">Standard Status</label>
+        <select name="is_locked" class="user-input">
+          <option value="True">Verschlossen</option>
+          <option value="False">Offen</option>
+        </select>
+      </div>
+      <div class="user-form-row">
+        <label class="user-form-label">Zugriff erlauben für</label>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          {% for group in groups %}
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="access_groups" value="{{ group.id }}" id="check{{ group.id }}">
+              <label class="form-check-label text-secondary" for="check{{ group.id }}" style="font-size: 0.85rem;">{{ group.name }}</label>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <button type="submit" class="user-btn-submit">Tür hinzufügen</button>
+    </form>
+  </div>
+</div>
+<!-- ... Rest wie vorher ... -->
+
+        </div>
+      </main>
+      <footer class="footer text-center py-5 mt-auto">
+        <p class="mb-0 text-secondary">&copy; 2025 Edu Lock. Alle Rechte vorbehalten.</p>
+      </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'edu_lockapp/js/script.js' %}"></script>
+  </body>
+</html>

@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-2el8nj-1(c)@xu%g+x9g@mw8uvtccqjv08fkrxpa2iic32=2)_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.88.88', '192.168.137.1', "www.edu-lock.gv.at",
+    "edu-lock.gv.at",]
 
 
 # Application definition
@@ -56,8 +57,8 @@ ROOT_URLCONF = 'edu_lock.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # leer
-        'APP_DIRS': True,  # <-- wichtig, damit Django die templates in der App findet
+        'DIRS': [],  
+        'APP_DIRS': True,  
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',

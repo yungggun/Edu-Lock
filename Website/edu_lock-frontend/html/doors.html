@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Lock - Türverwaltung</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <!-- Welcome Screen (identisch zur User-Page) -->
+    <section id="welcome-screen" class="welcome-screen">
+      <div class="pulse-bg"></div>
+      <div class="welcome-box">
+        <h1 class="welcome-title neon-reveal">Verbindung zu Controllern...</h1>
+        <p class="welcome-sub fade-soft">Türmodule werden geladen.</p>
+      </div>
+    </section>
+
+    <div id="page-content" class="page-container page-dashboard d-flex flex-column">
+      <!-- NAVBAR (Identisch) -->
+      <header class="dashboard-navbar">
+        <div class="navbar-container">
+          <div class="navbar-logo">
+            <img src="../img/logo.png" alt="Logo" class="navbar-logo-img">
+            <span class="navbar-logo-text">Edu Lock</span>
+          </div>
+         <nav class="navbar-menu navbar-menu-desktop">
+                    <a href="#" class="nav-item active">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="{% url 'doors' %}" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                        <span>Türen</span>
+                    </a>
+                    <a href="{% url 'users' %}" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Benutzer</span>
+                    </a>
+                    <a href="{% url 'logs' %}" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                            <polyline points="10 9 9 9 8 9" />
+                        </svg>
+                        <span>Logs</span>
+                    </a>
+                    <div class="nav-separator"></div>
+                    <a href="{% url 'profile' %}" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        <span>Profil</span>
+                    </a>
+                </nav>
+          
+          <div class="navbar-actions navbar-actions-desktop">
+            <div class="navbar-notification">
+              <button class="notification-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
+                <span class="notification-badge">3</span>
+              </button>
+            </div>
+            <div class="navbar-profile">
+              <button class="profile-btn">
+                <div class="navbar-avatar">
+                  <img src="../img/avatar-placeholder.jpg" alt="Avatar" class="avatar-img">
+                </div>
+                <div class="profile-info">
+                  <span class="profile-name">Admin</span>
+                  <span class="profile-role">Administrator</span>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9" /></svg>
+              </button>
+            </div>
+          </div>
+          
+          <button class="navbar-toggler navbar-toggler-mobile" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavOffcanvas">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Mobile Offcanvas -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileNavOffcanvas">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Menü</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+           <!-- Mobile Navigation Inhalt (gleich wie User Page) -->
+           <nav class="mobile-nav-links">
+             <a href="dashboard.html" class="mobile-nav-link">Dashboard</a>
+             <a href="doors.html" class="mobile-nav-link active">Türen</a>
+             <a href="users.html" class="mobile-nav-link">Benutzer</a>
+             <!-- ... weitere Links ... -->
+           </nav>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT (Angepasst für Türen) -->
+      <main class="dashboard-container">
+        
+        <!-- Wir nutzen exakt dieselben 'user-wrapper' Klassen für das Layout -->
+        <div class="user-wrapper">
+          
+          <!-- LINKE BOX: Türen Liste -->
+          <div class="user-list-box">
+            
+            <div class="user-search-wrapper">
+              <div class="user-search-bar">
+                <div class="search-icon-wrapper">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <!-- Placeholder Text angepasst -->
+                <input type="text" class="user-search-input" placeholder="Tür suchen (Raum, ID)..." aria-label="Tür suchen">
+                <button class="user-search-btn" type="button">
+                  <span class="btn-text">Suchen</span>
+                  <span class="btn-icon">→</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="user-table-container">
+              <table class="user-table">
+                <thead>
+                  <tr>
+                    <th>Tür / Raum</th>
+                    <th>Controller IP</th>
+                    <th>Zugriffsgruppen</th>
+                    <th>Status</th>
+                    <th>Aktionen</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <!-- Tür Eintrag 1 -->
+                  <tr>
+                    <td class="user-cell-main">
+                      <!-- Icon statt Avatar -->
+                      <div class="user-avatar-small" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">
+                        <i class="bi bi-door-closed-fill"></i>
+                      </div>
+                      <div class="user-cell-text">
+                        <div class="user-name-main">Haupteingang</div>
+                        <div class="user-name-sub">ID: DOOR-01</div>
+                      </div>
+                    </td>
+                    <td style="font-family: monospace; color: #94a3b8;">192.168.10.101</td>
+                    <td>
+                      <span class="user-group-tag user-group-tag-primary">Admins</span>
+                      <span class="user-group-tag user-group-tag-secondary">Lehrer</span>
+                    </td>
+                    <td>
+                      <!-- Locked Status -->
+                      <span class="user-status-badge" style="color: #f59e0b;">
+                        <i class="bi bi-lock-fill me-1"></i> Verschlossen
+                      </span>
+                    </td>
+                    <td>
+                      <div class="user-actions-row">
+                        <button class="user-action-btn user-action-edit" title="Konfigurieren">⚙️</button>
+                        <button class="user-action-btn user-action-success" title="Aufschließen">🔓</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Tür Eintrag 2 -->
+                  <tr>
+                    <td class="user-cell-main">
+                      <div class="user-avatar-small" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
+                        <i class="bi bi-door-open-fill"></i>
+                      </div>
+                      <div class="user-cell-text">
+                        <div class="user-name-main">Serverraum</div>
+                        <div class="user-name-sub">ID: DOOR-05</div>
+                      </div>
+                    </td>
+                    <td style="font-family: monospace; color: #94a3b8;">192.168.10.105</td>
+                    <td>
+                      <span class="user-group-tag user-group-tag-primary">Admins</span>
+                    </td>
+                    <td>
+                      <!-- Unlocked Status -->
+                      <span class="user-status-badge user-status-active">
+                        <i class="bi bi-unlock-fill me-1"></i> Offen
+                      </span>
+                    </td>
+                    <td>
+                      <div class="user-actions-row">
+                        <button class="user-action-btn user-action-edit" title="Konfigurieren">⚙️</button>
+                        <button class="user-action-btn user-action-danger" title="Abschließen">🔒</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                   <!-- Tür Eintrag 3 (Offline) -->
+                   <tr>
+                    <td class="user-cell-main">
+                      <div class="user-avatar-small" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);">
+                         <i class="bi bi-exclamation-triangle-fill"></i>
+                      </div>
+                      <div class="user-cell-text">
+                        <div class="user-name-main">Physik Saal</div>
+                        <div class="user-name-sub">ID: DOOR-09</div>
+                      </div>
+                    </td>
+                    <td style="font-family: monospace; color: #94a3b8;">192.168.10.109</td>
+                    <td>
+                      <span class="user-group-tag user-group-tag-secondary">Lehrer</span>
+                    </td>
+                    <td>
+                      <span class="user-status-badge user-status-disabled">
+                        <i class="bi bi-wifi-off me-1"></i> Offline
+                      </span>
+                    </td>
+                    <td>
+                      <div class="user-actions-row">
+                        <button class="user-action-btn user-action-edit">⚙️</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- RECHTE BOX: Neue Tür anlegen -->
+          <div class="user-side-box">
+            <div class="user-create-box">
+              <div class="box-header">
+                <!-- Titel angepasst -->
+                <h3 class="box-title">Neue Tür verbinden</h3>
+              </div>
+              <form class="user-form">
+                <div class="user-form-row">
+                  <label class="user-form-label">Bezeichnung / Raum</label>
+                  <input type="text" class="user-input" placeholder="z.B. Informatik Labor 1">
+                </div>
+                <div class="user-form-row">
+                  <label class="user-form-label">Controller IP-Adresse</label>
+                  <input type="text" class="user-input" placeholder="192.168.x.x">
+                </div>
+                <div class="user-form-row">
+                  <label class="user-form-label">Standard Status</label>
+                  <select class="user-input">
+                    <option>Verschlossen (Locked)</option>
+                    <option>Offen (Unlocked)</option>
+                  </select>
+                </div>
+                <div class="user-form-row">
+                   <label class="user-form-label">Zugriff erlauben für</label>
+                   <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="checkAdmin" checked>
+                        <label class="form-check-label text-secondary" for="checkAdmin" style="font-size: 0.85rem;">Admins</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="checkTeacher">
+                        <label class="form-check-label text-secondary" for="checkTeacher" style="font-size: 0.85rem;">Lehrer</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="checkStudent">
+                        <label class="form-check-label text-secondary" for="checkStudent" style="font-size: 0.85rem;">Schüler</label>
+                      </div>
+                   </div>
+                </div>
+                <button type="submit" class="user-btn-submit">Tür hinzufügen</button>
+              </form>
+            </div>
+
+            <!-- Zusätzliche Info Box für Türen -->
+            <div class="user-create-box">
+                <div class="box-header">
+                   <h3 class="box-title">Status Übersicht</h3>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; color: #94a3b8;">
+                   <span>Gesamt</span> <span style="color: #fff; font-weight: bold;">12</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; color: #94a3b8;">
+                   <span>Offen</span> <span style="color: #10b981; font-weight: bold;">2</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #94a3b8;">
+                   <span>Offline</span> <span style="color: #ef4444; font-weight: bold;">1</span>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer text-center py-5 mt-auto">
+        <p class="mb-0 text-secondary">&copy; 2025 Edu Lock. Alle Rechte vorbehalten.</p>
+      </footer>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
